@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Angular QuickStart Source
 [![Build Status][travis-badge]][travis-badge-url]
 
@@ -167,3 +168,7 @@ Shut it down manually with `Ctrl-C`.
 
 [travis-badge]: https://travis-ci.org/angular/quickstart.svg?branch=master
 [travis-badge-url]: https://travis-ci.org/angular/quickstart
+=======
+# ShoppingList
+Create a quick easy shopping list by searching for your favorite food and adding recipes. Automatically compiles the list.
+>>>>>>> 8986fff077cd01e5d3253bf060ed87f819a16a51
