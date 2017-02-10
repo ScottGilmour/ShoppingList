@@ -1,0 +1,65 @@
+<div class="container">
+    <h1>Recipe Form</h1>
+    <form (ngSubmit)="onSubmit()" #recipeForm="ngForm">
+      <div class="form-group">
+        <label for="name">Search</label>
+        <input type="text" class="form-control" placeholder="Grilled Cheese" id="query"
+               required
+               [(ngModel)]="queryString" name="query"
+              #querytext="ngModel">
+        <div [hidden]="querytext.valid || querytext.pristine"
+             class="alert alert-danger">
+          Query is required
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-default" [disabled]="!recipeForm.form.valid">Submit</button>
+    </form>
+
+    <br><hr><br>
+
+    <div class="media-container" *ngIf="recipes">
+      <div class="media my-animation" *ngFor="let recipe of recipes.response.results">
+        <div class="media-left">
+          <a href="#">
+            <img *ngIf="recipe.has_photo" class="media-object recipe-thumbnail" src="{{recipe.recipe_photo_url}}" alt="">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">{{recipe.main_title}} <small>By {{recipe.main_username}}</small></h4>
+          <ul class="list-inline no-margin-bottom">
+            <li>
+              <span *ngFor="let item of createRange(recipe.main_rating_mapping);" class="glyphicon glyphicon-star" aria-hidden="true"></span>
+              <p>Ratings: {{recipe.main_num_ratings}}, Time: {{recipe.recipe_totaltime}} minutes, Steps: {{recipe.num_steps}}</p>
+            </li>
+          </ul>
+          <p>{{recipe.main_description}}</p>
+
+          <div class="btn-group" role="group" aria-label="...">
+            <button (click)="onAdd(recipe.record_url, recipe.recipe_id)" type="button" class="btn btn-success" [disabled]="addButtonState">Ingredients</button>
+            <button type="button" class="btn btn-warning">Save</button>
+            <button (click)="onRemove(recipe.recipe_id)" type="button" class="btn btn-danger">Remove</button>
+          </div>
+
+          <a href="{{recipe.record_url}}">{{recipe.record_url}}</a>
+        </div>
+        <div class="media-footer my-animation" *ngIf="recipe.ingredients">
+          <h4>Ingredients</h4>
+          <div class="well">
+            <ul>
+              <li *ngFor="let ingredient of recipe.ingredients">
+                <div class="" [innerHTML]="ingredient">
+                </div>
+              </li>
+            </ul>
+
+            <button (click)="onAddAll(recipe.ingredients)" type="button" class="btn btn-primary" [disabled]="addIngredientsButtonState">
+              <span class="glyphicon glyphicon-check" aria-hidden="true" *ngIf="addIngredientsButtonState"></span>
+              {{(addIngredientsButtonState ? ' Added!' : 'Add all to grocery list')}}
+            </button>
+          </div>
+        </div>
+        <hr>
+      </div>
+    </div>
+</div>

@@ -3,3 +3,32 @@ h1 {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 250%;
 }
+
+.ng-valid[required], .ng-valid.required  {
+  border-left: 5px solid #42A948; /* green */
+}
+.ng-invalid:not(form)  {
+  border-left: 5px solid #a94442; /* red */
+}
+
+.recipe-thumbnail {
+  height: 150px;
+  width: 150px;
+}
+
+.no-margin-bottom {
+  margin-bottom: -10px !important;
+}
+
+@keyframes MyAnimation {
+  0% {
+    opacity: 0.0;
+  }
+  100% {
+    opacity: 1.0;
+  }
+}
+
+.my-animation {
+  animation: MyAnimation 1s;
+}
